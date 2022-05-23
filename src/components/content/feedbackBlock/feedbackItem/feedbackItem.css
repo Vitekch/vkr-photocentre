@@ -1,0 +1,14 @@
+.feedback-card {
+    padding: 10px;
+}
+
+.feedback-card__author {
+    font-size: 12px;
+    text-align: justify;
+    text-decoration: underline;
+}
+
+.feedback-card__text {
+    font-size: 14px;
+    text-align: justify;
+}

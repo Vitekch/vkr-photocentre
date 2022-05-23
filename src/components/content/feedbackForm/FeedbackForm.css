@@ -1,0 +1,29 @@
+.feedback-form {
+    min-height: 600px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedback-form__card {
+    padding: 10px;
+    max-width: 600px;
+}
+
+.feedback-form__field-container {
+    padding: 10px
+}
+
+.feedback-form__input {
+}
+
+.feedback-form__textarea {
+    min-height: 250px !important;
+}
+
+.feedback-form__submit-block {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+}

@@ -1,0 +1,24 @@
+.carousel__item {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    background-color: #222a36;
+    color: rgb(238, 238, 238);
+}
+
+.carousel__item__content {
+    width: 75%;
+}
+
+.carousel__item__content__text {
+    text-align: justify;
+    font-size: 14px;
+}
+
+.carousel__item__content__title {
+    color: rgb(238, 238, 238);
+    text-align: justify;
+    font-size: 30px;
+    font-weight: 700;
+}

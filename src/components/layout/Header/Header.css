@@ -8,7 +8,8 @@
     justify-content: space-around;
     align-items: center;
     padding-top: 10px;
-    background-color: rgb(23, 28, 32);
+    background-color: rgb(43, 51, 58);
+    box-shadow: 10px 0px 4px 1px rgb(0, 0, 0, .7);
     color: rgb(238, 238, 238);
 }
 
