@@ -5,7 +5,6 @@ const { Header } = Layout;
 
 const scrollToBlock = (id) => {
     const el = document.getElementById(id);
-    console.log(el.getBoundingClientRect())
     if (el) {
         window.scroll({
             top: el.getBoundingClientRect().top - 200 + window.pageYOffset,
