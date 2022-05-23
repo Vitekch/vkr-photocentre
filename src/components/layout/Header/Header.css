@@ -1,0 +1,49 @@
+.land-header {
+    height: auto;
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10px;
+    background-color: rgb(23, 28, 32);
+    color: rgb(238, 238, 238);
+}
+
+.land-header__brand {
+    padding: 0 20px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    color: rgb(238, 238, 238);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    transition: .2s;
+}
+
+.land-header__brand:hover {
+    color: rgb(238, 238, 238);
+    border-right: 5px solid rgb(238, 238, 238);
+    border-left: 5px solid rgb(238, 238, 238);
+}
+
+.land-header__nav {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.land-header__nav__link {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: rgb(238, 238, 238);
+    border-bottom: 1px solid transparent;
+    transition: .2s;
+}
+
+.land-header__nav__link:hover {
+    color: rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
