@@ -1,0 +1,21 @@
+.service-view__card {
+    width: 1000px;
+    height: 600px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.service-view__col {
+    padding: 10px;
+}
+
+.service-view__title {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.service-view__description {
+    text-align: justify;
+}
