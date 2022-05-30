@@ -1,0 +1,17 @@
+.admin-panel__container {
+    padding: 20px;
+}
+
+.admin-panel__heading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-panel__controls-list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}

@@ -1,0 +1,12 @@
+.loading-overlay {
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(250, 252, 253);
+}
