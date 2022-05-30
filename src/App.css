@@ -15,6 +15,10 @@
   display: flex !important;
 }
 
-.flex--j-centre {
+.flex--j-center {
   justify-content: center !important;
+}
+
+.flex--a-center {
+  align-items: center !important;
 }
