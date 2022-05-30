@@ -19,3 +19,10 @@
 .service-view__description {
     text-align: justify;
 }
+
+.service-view__send-order-block {
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    padding-bottom: 35px;
+}
