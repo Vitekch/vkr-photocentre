@@ -90,8 +90,8 @@ const columnsPayments = [
 const columnsEmployees = [
 	{
 		title: "ID",
-		dataIndex: "id_employee",
-		key: "id_employee",
+		dataIndex: "Id_employee",
+		key: "Id_employee",
 	},
 	{
 		title: "Имя",
@@ -137,8 +137,8 @@ const columnsEmployees = [
 const columnsOrderTypes = [
 	{
 		title: "ID",
-		dataIndex: "order_id",
-		key: "order_id",
+		dataIndex: "id_type",
+		key: "id_type",
 	},
 	{
 		title: "Наименование услуги",
@@ -159,6 +159,45 @@ const AdminView = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [isLoadingFailed, setLoadingFailed] = useState(false);
 	const [columns, setColumts] = useState(columnsOrders);
+	const [tableData, setTableData] = useState([]);
+
+	const navigationHandler = (key) => {
+		setTableKey(key);
+		fetch("http://localhost:3001/get-data",{
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify({ type: key }),
+		}).then((result) => {
+			if (result.ok) {
+				return result.json();
+			}
+		}).then((data) => {
+			console.log(data)
+			setTableData(data);
+			switch (key) {
+				case "customers":
+					setColumts(columnsClients);
+					break;
+				case "orders":
+					setColumts(columnsOrders);
+					break;
+				case "employees":
+					setColumts(columnsEmployees);
+					break;
+				case "payments":
+					setColumts(columnsPayments);
+					break;
+				case "order_types":
+					setColumts(columnsOrderTypes);
+					break;
+				default:
+					break;
+			}
+		})
+	}
+
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (!localStorage.getItem("token")) {
@@ -167,8 +206,24 @@ const AdminView = () => {
 				try {
 					setTimeout(() => { setPercent(26) }, 1000);
 					setTimeout(() => { setPercent(52) }, 2000);
-					setTimeout(() => { setPercent(97); navigate("/admin-login", { replace: true }); }, 4000);
-					setTimeout(() => { setLoading(false) }, 5000);
+					setTimeout(() => {
+						fetch("http://localhost:3001/get-data",{
+							headers: {
+								"Content-Type": "application/json",
+							},
+							method: "POST",
+							body: JSON.stringify({ type: "orders" }),
+						}).then((result) => {
+							setPercent(69)
+							if (result.ok) {
+								return result.json();
+							}
+						}).then((data) => {
+							setTableData(data);
+							setPercent(92);
+							setColumts(columnsOrders);
+						}).finally(() => {setLoading(false)});
+					}, 3000)
 				} catch (e) {
 					setLoadingFailed(true)
 				}
@@ -189,31 +244,31 @@ const AdminView = () => {
 			<Row>
 				<Col className="admin-panel__controls-list">
 					<Button
-						onClick={() => {setTableKey("customers"); setColumts(columnsClients)}}
+						onClick={() => {navigationHandler("customers")}}
 						type={tableKey === "customers" ? "primary" : "default"}
 					>
 						Клиенты
 					</Button>
 					<Button
-						onClick={() => {setTableKey("orders"); setColumts(columnsOrders)}}
+						onClick={() => {navigationHandler("orders")}}
 						type={tableKey === "orders" ? "primary" : "default"}
 					>
 						Заказы
 					</Button>
 					<Button
-						onClick={() => {setTableKey("employees"); setColumts(columnsEmployees)}}
+						onClick={() => {navigationHandler("employees")}}
 						type={tableKey === "employees" ? "primary" : "default"}
 					>
 						Сотрудники
 					</Button>
 					<Button
-						onClick={() => {setTableKey("payments"); setColumts(columnsPayments)}}
+						onClick={() => {navigationHandler("payments")}}
 						type={tableKey === "payments" ? "primary" : "default"}
 					>
 						Платежи
 					</Button>
 					<Button
-						onClick={() => {setTableKey("order_types"); setColumts(columnsOrderTypes)}}
+						onClick={() => {navigationHandler("order_types")}}
 						type={tableKey === "order_types" ? "primary" : "default"}
 					>
 						Типы услуг
@@ -223,7 +278,7 @@ const AdminView = () => {
 			</Row>
 			<Row>
 				<Col className="admin-panel__table">
-					<Table dataSource={[]} columns={columns} />;
+					<Table dataSource={tableData} columns={columns} />;
 				</Col>
 			</Row>
 			</>)}

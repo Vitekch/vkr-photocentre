@@ -1,0 +1,23 @@
+
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../../assets/heading.png");
+    background-size: cover;
+    background-position: center;
+    background-color: #585656;
+    background-blend-mode: exclusion;
+    height: 900px;
+    width: 100%;
+    padding: 20px;
+}
+
+.heading__text {
+    padding-top: 150px;
+    width: 70%;
+    text-align: justify;
+    letter-spacing: 1.5px;
+    font-size: 30px;
+    color: white;
+}

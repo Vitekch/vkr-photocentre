@@ -1,5 +1,6 @@
 import "./NewsCarousel.css";
 import { Carousel, Divider } from 'antd';
+import { useEffect, useState } from "react";
 
 const mockData = [
     {
@@ -29,13 +30,35 @@ const mockData = [
 ]
 
 const NewsCarousel = () => {
+
+    const [news, setNews] = useState([]);
+    useEffect(() => {
+        const asyncActions = async () => {
+            fetch("http://localhost:3001/get-data",{
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({ type: "news" }),
+            }).then((result) => {
+                if (result.ok) {
+                    return result.json();
+                }
+            }).then((data) => {
+                setNews(data);
+            });
+        }
+
+        asyncActions();
+    }, [])
+
     return (
         <>
             <h1 className="block-title" id="news">
                 Новости
             </h1>
             <Carousel autoplay>
-                { mockData.map((el) => (
+                { news.map((el) => (
                     <div key={el.id} className="carousel__item">
                         <div className="carousel__item__content">
                             <h2 className="carousel__item__content__title">{el.title}</h2>

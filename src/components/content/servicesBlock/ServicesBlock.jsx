@@ -1,5 +1,6 @@
 import "./ServicesBlock.css";
 import { Collapse, Row } from "antd";
+import { useEffect, useState } from "react";
 import ServiceCard from "./serviceCard/ServiceCard";
 const { Panel } = Collapse;
 
@@ -27,21 +28,43 @@ const services = [
 ]
 
 const ServicesBlock = () => {
+
+    const [services, setServices] = useState([]);
+    useEffect(() => {
+        const asyncActions = async () => {
+            fetch("http://localhost:3001/get-data",{
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({ type: "order_types" }),
+            }).then((result) => {
+                if (result.ok) {
+                    return result.json();
+                }
+            }).then((data) => {
+                setServices(data);
+            });
+        }
+
+        asyncActions();
+    }, [])
+
     return (
         <>
             <h1 className="block-title" id="services">
                 Каталог услуг
             </h1>
             <Row>
-                { services.map((el) => (
-                    <ServiceCard key={el.id} service={el} />
+                { services.slice(0, 4).map((el) => (
+                    <ServiceCard key={el.id_type} service={el} />
                 ))}
             </Row>
             <Collapse className="other-services">
                 <Panel className="other-services__panel" header="Остальные услуги" key="1">
                     <Row>
-                        { services.map((el) => (
-                            <ServiceCard key={el.id} service={el} />
+                        { services.slice(4).map((el) => (
+                            <ServiceCard key={el.id_type} service={el} />
                         ))}
                     </Row>
                 </Panel>
