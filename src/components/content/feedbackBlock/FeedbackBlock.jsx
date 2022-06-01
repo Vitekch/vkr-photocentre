@@ -1,6 +1,7 @@
 import "./FeedbackBlock.css";
 import { Row } from "antd";
 import FeedbackItem from "./feedbackItem/feedbackItem";
+import { useEffect, useState } from "react";
 
 const feedbacks = [
     {
@@ -22,6 +23,28 @@ const feedbacks = [
 ]
 
 const FeedbackBlock = () => {
+
+    const [feedbacks, setFeedbacks] = useState([]);
+    useEffect(() => {
+        const asyncActions = async () => {
+            fetch("http://localhost:3001/get-data",{
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({ type: "feedback" }),
+            }).then((result) => {
+                if (result.ok) {
+                    return result.json();
+                }
+            }).then((data) => {
+                setFeedbacks(data.sort((a, b) => b.id - a.id).slice(0, 3));
+            });
+        }
+
+        asyncActions();
+    }, [])
+
     return (
         <>
             <h1 className="block-title"  id="feedbacks">

@@ -11,14 +11,14 @@ const ServiceCard = ({ service }) => {
     return (
         <>
             <Card className="service-view__card">
-                <Row>
-                    <Col md={12} className="service-view__col flex flex--a-center">
-                        <img src={service.img} width="100%" alt="Обложка услуги" />
+                <Row style={{width: "100%"}}>
+                    <Col md={12} className="service-view__col">
+                        {service.image && (<img src={service.image} width="100%" alt="Обложка услуги" />)}
                     </Col>
                     <Col md={12} className="service-view__col">
                         <Row>
                             <Col md={16}>
-                                <h1 className="service-view__title">{service.title}</h1>
+                                <h1 className="service-view__title">{service.type_name + " "}</h1><h2>{service.price + "руб."}</h2>
                             </Col>
                             <Col md={8} className="service-view__send-order-block">
                             <Button type="primary" onClick={() => {setModalVisible(true)}}>

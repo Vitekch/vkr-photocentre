@@ -9,6 +9,20 @@ const FeedbackForm = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const [isLoading, setLoading] = useState(false);
+
+    const submitHandler = () => {
+        if (name && email && message) {
+            setLoading(true);
+            fetch("http://localhost:3001/post-data",{
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                method: "POST",
+                body: JSON.stringify({ type: "feedback", payload: { name, email, message } })
+            }).finally((result) => { setLoading(false) })
+        }
+    }
 
     return (
         <>
@@ -49,7 +63,7 @@ const FeedbackForm = () => {
                         </Row>
                         <Row className="feedback-form__submit-block">
                             <Col>
-                                <Button type="primary">
+                                <Button loading={isLoading} onClick={() => {submitHandler()}} type="primary">
                                     Отправить
                                 </Button>
                             </Col>
